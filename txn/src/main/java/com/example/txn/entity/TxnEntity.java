@@ -22,6 +22,7 @@ public class TxnEntity {
     String couponId;
     Double amount;
     int couponAmount;
+    int couponNumber;
     Double paidAmount;
     @CreatedDate
     LocalDate transactionDate;
