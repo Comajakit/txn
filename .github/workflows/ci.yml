@@ -34,8 +34,11 @@ jobs:
     
     - name: List Docker containers
       run: docker ps
+      
+    - name: logs txn
+      run: docker logs txn_txn_1 -f
 
-    - name: logs compose
+    - name: logs 
       run: docker-compose logs
 
 
