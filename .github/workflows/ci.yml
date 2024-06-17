@@ -39,7 +39,10 @@ jobs:
       run: docker ps | grep txn_txn_1
     
     - name: Logs txn
-      run: docker logs txn_txn_1 -f
+      run: docker logs txn_txn_1
+      
+    - name: Docker Compose logs
+      run: docker-compose logs txn
 
     - name: Run Tests
       run: |
