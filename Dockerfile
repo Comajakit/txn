@@ -18,17 +18,3 @@ COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8084
 
 CMD ["java", "-jar", "app.jar"]
-
-# Stage 3: Test image
-FROM python:3.9-slim as tester
-
-WORKDIR /app
-
-# Install Robot Framework and RequestsLibrary
-RUN pip install robotframework robotframework-requests
-
-COPY --from=runtime /app/app.jar app.jar
-COPY txn/integration_tests.robot .
-
-# Run the application and tests
-CMD ["sh", "-c", "java -jar app.jar & robot integration_tests.robot"]
