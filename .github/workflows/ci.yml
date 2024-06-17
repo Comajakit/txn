@@ -32,10 +32,13 @@ jobs:
       run: |
         docker-compose -f txn/docker-compose.yml up --build -d
 
+    # - name: Set up Docker Compose
+    #   run: |
+    #     docker-compose up --build -d
+
     - name: Run Tests
       run: |
-        # Add your test scripts here, for example:
-        robot ./tests/
+        docker-compose exec txn robot integration_tests.robot
 
     - name: Clean up
       if: always()
