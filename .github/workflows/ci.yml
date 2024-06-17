@@ -31,11 +31,8 @@ jobs:
     - name: List directory contents for debugging
       run: ls -la
 
-    - name: check txn
-      run: cd txn
-
     - name: List directory contents for debugging
-      run: ls -la
+      run: ls -la txn
 
     - name: go back
       run: cd ..
