@@ -34,17 +34,9 @@ jobs:
     
     - name: List Docker containers
       run: docker ps
-
-    - name: Wait for services to be ready
-      run: |
-        for i in {1..10}; do
-          if curl -s http://txn:8084/health && curl -s http://shop:8082/health; then
-            echo "Services are up and running"
-            break
-          fi
-          echo "Waiting for services to be ready..."
-          sleep 5
-        done
+      
+    - name: logs txn
+      run: docker logs txn_txn_1
 
     - name: Run Tests
       run: |
