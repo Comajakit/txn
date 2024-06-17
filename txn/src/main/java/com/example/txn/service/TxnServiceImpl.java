@@ -1,8 +1,8 @@
 package com.example.txn.service;
 
 import com.example.txn.entity.TxnEntity;
+import com.example.txn.interfaces.TxnService;
 import com.example.txn.repository.TxnRepository;
-import com.example.txn.service.TxnService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

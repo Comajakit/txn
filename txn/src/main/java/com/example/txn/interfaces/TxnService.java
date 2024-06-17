@@ -1,4 +1,4 @@
-package com.example.txn.service;
+package com.example.txn.interfaces;
 
 import com.example.txn.entity.TxnEntity;
 
