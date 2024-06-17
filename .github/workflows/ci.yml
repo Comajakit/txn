@@ -26,22 +26,28 @@ jobs:
       run: ls -la
 
 
-    - name: Build Docker image for testing
-      run: docker build . -t app
-
-    - name: Run Robot Framework tests
-      run: |
-        docker run --name app app
 
     # - name: List directory contents for debugging
     #   run: ls -la txn
 
-    # - name: Set up Docker Compose
-    #   run: |
-    #     docker-compose -f docker-compose.yml up --build -d
+    - name: Set up Docker Compose
+      run: |
+        docker-compose -f docker-compose.yml up --build -d
     
-    # - name: List Docker containers
-    #   run: docker ps
+    - name: Build Docker image for testing
+      run: docker build . -t app
+
+
+
+    - name: List Docker containers
+      run: docker ps
+
+    - name: Start App
+      run: |
+        docker run --name app app
+
+    - name: List Docker containers
+      run: docker ps
       
     # - name: Check txn container status
     #   run: docker ps | grep txn_txn_1
