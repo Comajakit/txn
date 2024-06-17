@@ -1,7 +1,4 @@
 version: '3.8'
-networks:
-  app-network:
-    driver: bridge
 services:
   db:
     image: mysql:5.7
@@ -19,8 +16,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - app-network
   txn:
     build:
       context: ../txn
@@ -36,12 +31,9 @@ services:
   #     interval: 30s
   #     timeout: 10s
   #     retries: 3
-    networks:
-      - app-network
     depends_on:
       db:
         condition: service_healthy
-    
 
   shop:
     build:
@@ -58,8 +50,6 @@ services:
   #     interval: 30s
   #     timeout: 10s
   #     retries: 3
-    networks:
-      - app-network
     depends_on:
       db:
         condition: service_healthy
