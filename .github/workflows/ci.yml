@@ -25,9 +25,15 @@ jobs:
         repository: 'Comajakit/shop'
         path: 'shop'
 
+    - name: Set working directory
+      run: cd $GITHUB_WORKSPACE
+
+    - name: List directory contents for debugging
+      run: ls -la
+
     - name: Set up Docker Compose
       run: |
-        docker-compose -f docker-compose.yml up --build -d
+        docker-compose -f $GITHUB_WORKSPACE/docker-compose.yml up --build -d
 
     - name: Run Tests
       run: |
