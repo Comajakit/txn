@@ -51,7 +51,8 @@ jobs:
     #   run: docker ps | grep txn_txn_1
     
     - name: Logs txn
-      run: docker-compose logs txn_txn_1 -f
+      run: docker-compose logs txn -f
+
     - name: Wait for services to be ready
       run: sleep 20
     
