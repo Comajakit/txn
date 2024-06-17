@@ -58,7 +58,7 @@ jobs:
         docker run --network container:txn_txn_1 jwilder/dockerize \
           -wait tcp://db:3306 \
           -wait http://localhost:8084/api/transactions/status \
-          -wait http://localhost:8084/api/shops/status \
+          -wait http://localhost:8082/api/shops/status \
           -timeout 1m
 
         
