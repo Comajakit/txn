@@ -1,0 +1,40 @@
+name: Integration Test Workflow
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout txn repository
+      uses: actions/checkout@v3
+      with:
+        repository: 'Comajakit/txn'
+        path: 'txn'
+
+    - name: Checkout shop repository
+      uses: actions/checkout@v3
+      with:
+        repository: 'Comajakit/shop'
+        path: 'shop'
+
+    - name: Set up Docker Compose
+      run: |
+        docker-compose -f ./docker-compose.yml up --build -d
+
+    - name: Run Tests
+      run: |
+        # Add your test scripts here, for example:
+        robot ./tests/
+
+    - name: Clean up
+      if: always()
+      run: |
+        docker-compose down
