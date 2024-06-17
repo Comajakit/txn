@@ -34,18 +34,18 @@ jobs:
       run: |
         docker-compose -f docker-compose.yml up --build -d
     
-    - name: Build Docker image for testing
-      run: docker build . -t app
+    # - name: Build Docker image for testing
+    #   run: docker build . -t app
 
     - name: List Docker containers
       run: docker ps
 
-    - name: Start App
-      run: |
-        docker run --name app app
+    # - name: Start App
+    #   run: |
+    #     docker run --name app app
 
-    - name: List Docker containers
-      run: docker ps
+    # - name: List Docker containers
+    #   run: docker ps
       
     # - name: Check txn container status
     #   run: docker ps | grep txn_txn_1

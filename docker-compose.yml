@@ -16,16 +16,16 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  # txn:
-  #   build:
-  #     context: ../txn
-  #   ports:
-  #     - "8080:8084"
-  #   environment:
-  #     - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mysqldatabase
-  #     - SPRING_DATASOURCE_USERNAME=root
-  #     - SPRING_DATASOURCE_PASSWORD=P@ssw0rd
-  #     - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  txn:
+    build:
+      context: ../txn
+    ports:
+      - "8080:8084"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mysqldatabase
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=P@ssw0rd
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
   #   healthcheck:
   #     test: ["CMD", "curl", "-f", "http://localhost:8084/health"]
   #     interval: 30s
