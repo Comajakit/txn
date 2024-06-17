@@ -11,10 +11,10 @@ RUN mvn clean package -DskipTests
 # Stage 2: Runtime image
 FROM openjdk:17-slim as runtime
 
-WORKDIR /app
-
 # Install curl
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
 
 COPY --from=builder /app/target/*.jar app.jar
 
