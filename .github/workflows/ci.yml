@@ -55,7 +55,7 @@ jobs:
     #   run: sleep 20
     - name: Wait for services using Dockerize
       run: |
-        docker run --network container:your_container_name jwilder/dockerize -wait tcp://db:3306 -wait http://localhost:8084/health -timeout 1m
+        docker run --network container:txn_txn_1 jwilder/dockerize -wait tcp://db:3306 -wait http://localhost:8084/health -timeout 1m
 
         
     - name: List Docker containers
