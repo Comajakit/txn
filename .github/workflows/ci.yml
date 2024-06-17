@@ -22,12 +22,6 @@ jobs:
         repository: 'Comajakit/shop'
         path: 'shop'
 
-    - name: List directory contents for debugging
-      run: ls -la
-
-    # - name: List directory contents for debugging
-    #   run: ls -la txn
-
     - name: Set up Docker Compose
       run: |
         docker-compose -f docker-compose.yml up --build -d
@@ -35,38 +29,20 @@ jobs:
     - name: List Docker containers
       run: docker ps
 
-    # - name: Start App
+    # - name: Wait for services using Dockerize
     #   run: |
-    #     docker run --name app app
-
-    # - name: List Docker containers
-    #   run: docker ps
-      
-    # - name: Check txn container status
-    #   run: docker ps | grep txn_txn_1
-    
-    - name: Logs txn
-      run: docker-compose logs txn
-
-    # - name: Logs txn
-    #   run: docker logs txn_txn_1 -f
-
-    # - name: Wait for services to be ready
-    #   run: sleep 20
+    #     docker run --network container:txn_txn_1 jwilder/dockerize \
+    #       -wait tcp://db:3306 \
+    #       -wait http://localhost:8084/api/transactions/status \
+    #       -timeout 1m
     - name: Wait for services using Dockerize
       run: |
-        docker run --network container:txn_txn_1 jwilder/dockerize \
+        docker run --network host jwilder/dockerize \
           -wait tcp://db:3306 \
-          -wait http://localhost:8084/api/transactions/status \
-          -wait http://localhost:8082/api/shops/status \
+          -wait http://txn:8084/api/transactions/status \
+          -wait http://shop:8082/api/shops/status \
           -timeout 1m
 
-        
-    - name: List Docker containers
-      run: docker ps
-
-    - name: Docker Compose logs
-      run: docker exec txn_txn_1 curl localhost:8084/api/transactions/status
 
     - name: Run Tests
       run: |
