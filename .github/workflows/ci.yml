@@ -30,7 +30,7 @@ jobs:
 
     - name: Set up Docker Compose
       run: |
-        docker-compose -f txn/docker-compose.yml up --build -d
+        docker-compose -f docker-compose.yml up --build -d
 
     # - name: Set up Docker Compose
     #   run: |
