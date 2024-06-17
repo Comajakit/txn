@@ -31,6 +31,9 @@ jobs:
     - name: Set up Docker Compose
       run: |
         docker-compose -f docker-compose.yml up --build -d
+    
+    - name: List Docker containers
+      run: docker ps
 
     - name: Wait for services to be ready
       run: |
