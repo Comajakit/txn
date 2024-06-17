@@ -32,11 +32,14 @@ jobs:
       run: |
         docker-compose -f docker-compose.yml up --build -d
 
+    - name: Wait for services to be ready
+      run: sleep 10  # Adjust the sleep duration as needed
+
     - name: Run Tests
       run: |
-        docker-compose exec -T txn robot integration_tests.robot
+        docker-compose run --rm tests
 
     - name: Clean up
       if: always()
       run: |
-        docker-compose down
+        docker-compose -f docker-compose.yml down
