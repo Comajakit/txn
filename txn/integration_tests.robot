@@ -2,20 +2,20 @@
 Library    RequestsLibrary
 
 *** Variables ***
-${TXN_URL}       http://localhost:8080/api/transactions/status
-${SHOP_URL}      http://localhost:8081/api/shops/status  # Update this if the actual endpoint differs
+${TXN_BASE_URL}   http://localhost:8080
+${SHOP_BASE_URL}  http://localhost:8081
 
 *** Test Cases ***
 Test GET request to txn service
     [Documentation]    Verify that the txn service responds with status code 200
-    Create Session    txn    ${TXN_URL}
-    ${response}=    GET    txn    /
+    Create Session    txn    ${TXN_BASE_URL}
+    ${response}=    GET On Session    txn    /api/transactions/status
     Should Be Equal As Numbers    ${response.status_code}    200
     Should Be Equal    ${response.text}    UP
 
 Test GET request to shop service
     [Documentation]    Verify that the shop service responds with status code 200
-    Create Session    shop    ${SHOP_URL}
-    ${response}=    GET    shop    /
+    Create Session    shop    ${SHOP_BASE_URL}
+    ${response}=    GET On Session    shop    /api/shops/status
     Should Be Equal As Numbers    ${response.status_code}    200
-    # Add more assertions if needed to check the response content
+    Should Be Equal    ${response.text}    UP

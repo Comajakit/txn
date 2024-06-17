@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.1 on win32)" generated="2024-06-17T13:39:04.417105" rpa="false" schemaversion="5">
+<suite id="s1" name="Integration Tests" source="D:\personal\txn\txn\integration_tests.robot">
+<test id="s1-t1" name="Test GET request to txn service" line="9">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-06-17T13:39:04.676273" level="INFO">Creating Session using : alias=txn, url=http://localhost:8084, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>txn</arg>
+<arg>${TXN_BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-06-17T13:39:04.676273" elapsed="0.000000"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2024-06-17T13:39:04.691936" level="INFO">GET Request : url=http://localhost:8084/api/transactions/status 
+ path_url=/api/transactions/status 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-06-17T13:39:04.691936" level="INFO">GET Response : url=http://localhost:8084/api/transactions/status 
+ status=200, reason= 
+ headers={'Content-Type': 'text/plain;charset=UTF-8', 'Content-Length': '2', 'Date': 'Mon, 17 Jun 2024 06:39:04 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body=UP 
+ </msg>
+<msg time="2024-06-17T13:39:04.691936" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>txn</arg>
+<arg>/api/transactions/status</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-06-17T13:39:04.676273" elapsed="0.015663"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2024-06-17T13:39:04.692991" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2024-06-17T13:39:04.691936" elapsed="0.001712"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.text}</arg>
+<arg>UP</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-06-17T13:39:04.693648" elapsed="0.000000"/>
+</kw>
+<doc>Verify that the txn service responds with status code 200</doc>
+<status status="PASS" start="2024-06-17T13:39:04.676273" elapsed="0.017375"/>
+</test>
+<test id="s1-t2" name="Test GET request to shop service" line="16">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-06-17T13:39:04.694615" level="INFO">Creating Session using : alias=shop, url=http://localhost:8081, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>shop</arg>
+<arg>${SHOP_BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-06-17T13:39:04.694615" elapsed="0.000000"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-06-17T13:39:08.751678" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /api/shops/status (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001A319D62A80&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</msg>
+<var>${response}</var>
+<arg>http://localhost:8081/api/shops/status</arg>
+<doc>Sends a GET request.</doc>
+<status status="FAIL" start="2024-06-17T13:39:04.694615" elapsed="4.057063">ConnectionError: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /api/shops/status (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001A319D62A80&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</status>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" start="2024-06-17T13:39:08.751678" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.text}</arg>
+<arg>UP</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2024-06-17T13:39:08.751678" elapsed="0.000000"/>
+</kw>
+<doc>Verify that the txn service responds with status code 200</doc>
+<status status="FAIL" start="2024-06-17T13:39:04.694615" elapsed="4.057063">ConnectionError: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /api/shops/status (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001A319D62A80&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</status>
+</test>
+<status status="FAIL" start="2024-06-17T13:39:04.417105" elapsed="4.334573"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="1" skip="0" id="s1" name="Integration Tests">Integration Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

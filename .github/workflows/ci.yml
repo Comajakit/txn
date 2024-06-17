@@ -13,17 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout txn repository
+    - name: Checkout this repository
       uses: actions/checkout@v3
-      with:
-        repository: 'Comajakit/txn'
-        path: 'txn'
 
     - name: Checkout shop repository
       uses: actions/checkout@v3
       with:
         repository: 'Comajakit/shop'
         path: 'shop'
+
+    - name: List directory contents for debugging
+      run: ls -la
 
     - name: List directory contents for debugging
       run: ls -la txn
