@@ -2,7 +2,7 @@ version: '3.8'
 services:
   txn:
     build:
-      context: ../txn
+      context: ./txn
     ports:
       - "8080:8084"
     environment:
@@ -13,7 +13,7 @@ services:
 
   shop:
     build:
-      context: ../shop
+      context: ./shop
     ports:
       - "8081:8082"
     environment:
