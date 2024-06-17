@@ -34,13 +34,6 @@ jobs:
     
     - name: List Docker containers
       run: docker ps
-      
-    - name: logs txn
-      run: docker logs txn_txn_1 -f
-
-    - name: logs 
-      run: docker-compose logs
-
 
     - name: Wait for services to be ready
       run: |
