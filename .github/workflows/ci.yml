@@ -48,8 +48,8 @@ jobs:
     - name: Logs txn
       run: docker-compose logs txn
 
-    - name: Logs txn
-      run: docker logs txn_txn_1 -f
+    # - name: Logs txn
+    #   run: docker logs txn_txn_1 -f
 
     - name: Wait for services to be ready
       run: sleep 20
