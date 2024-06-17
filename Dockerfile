@@ -5,8 +5,8 @@ FROM maven:3.8.5-openjdk-17-slim as builder
 WORKDIR /app
 
 # Copy the Maven pom.xml file and source code into the image
-COPY pom.xml .
-COPY src ./src
+COPY txn/pom.xml .
+COPY txn/src ./src
 
 # Build the application using Maven and skip the tests for faster builds
 RUN mvn clean package -DskipTests
