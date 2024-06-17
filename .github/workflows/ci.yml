@@ -37,8 +37,6 @@ jobs:
     - name: Build Docker image for testing
       run: docker build . -t app
 
-
-
     - name: List Docker containers
       run: docker ps
 
