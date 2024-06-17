@@ -1,27 +1,34 @@
-# Start with a base image containing Maven and Java runtime for building the application
+# Stage 1: Build the application
 FROM maven:3.8.5-openjdk-17-slim as builder
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the Maven pom.xml file and source code into the image
 COPY txn/pom.xml .
 COPY txn/src ./src
 
-# Build the application using Maven and skip the tests for faster builds
 RUN mvn clean package -DskipTests
 
-# Use OpenJDK 17 for the runtime image
-FROM openjdk:17-slim
+# Stage 2: Runtime image
+FROM openjdk:17-slim as runtime
 
-# Set the working directory in the runtime container
 WORKDIR /app
 
-# Copy the built jar file from the build stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# Expose the port the application uses
 EXPOSE 8084
 
-# Command to run the application
 CMD ["java", "-jar", "app.jar"]
+
+# Stage 3: Test image
+FROM python:3.9-slim as tester
+
+WORKDIR /app
+
+# Install Robot Framework and RequestsLibrary
+RUN pip install robotframework robotframework-requests
+
+COPY --from=runtime /app/app.jar app.jar
+COPY txn/integration_tests.robot .
+
+# Run the application and tests
+CMD ["sh", "-c", "java -jar app.jar & robot integration_tests.robot"]
