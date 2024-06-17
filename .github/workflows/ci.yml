@@ -42,7 +42,7 @@ jobs:
       run: docker logs txn_txn_1
       
     - name: Docker Compose logs
-      run: docker-compose logs txn
+      run: docker exec txn_txn_1 curl localhost:8084/api/transactions/status
 
     - name: Run Tests
       run: |
