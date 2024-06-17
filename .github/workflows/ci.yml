@@ -38,8 +38,9 @@ jobs:
     - name: logs txn
       run: docker logs txn -f
 
-    - name: logs shop
-      run: docker logs shop -f
+    - name: logs compose
+      run: docker-compose logs
+
 
     - name: Wait for services to be ready
       run: |
