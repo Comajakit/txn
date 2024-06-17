@@ -54,6 +54,10 @@ jobs:
     #   run: docker-compose logs txn_txn_1
     - name: Wait for services to be ready
       run: sleep 20
+    
+    - name: List Docker containers
+      run: docker ps
+
 
     - name: Docker Compose logs
       run: docker exec txn_txn_1 curl localhost:8084/api/transactions/status
