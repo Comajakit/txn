@@ -55,7 +55,11 @@ jobs:
     #   run: sleep 20
     - name: Wait for services using Dockerize
       run: |
-        docker run --network container:txn_txn_1 jwilder/dockerize -wait tcp://db:3306 -wait http://localhost:8084/api/transactions/status -timeout 1m
+        docker run --network container:txn_txn_1 jwilder/dockerize \
+          -wait tcp://db:3306 \
+          -wait http://localhost:8084/api/transactions/status \
+          -wait http://localhost:8084/api/shops/status \
+          -timeout 1m
 
         
     - name: List Docker containers
