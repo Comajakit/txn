@@ -16,39 +16,47 @@ jobs:
     - name: Checkout this repository
       uses: actions/checkout@v3
 
-    - name: Checkout shop repository
-      uses: actions/checkout@v3
-      with:
-        repository: 'Comajakit/shop'
-        path: 'shop'
+    # - name: Checkout shop repository
+    #   uses: actions/checkout@v3
+    #   with:
+    #     repository: 'Comajakit/shop'
+    #     path: 'shop'
 
     - name: List directory contents for debugging
       run: ls -la
 
-    - name: List directory contents for debugging
-      run: ls -la txn
 
-    - name: Set up Docker Compose
+    - name: Build Docker image for testing
+      run: docker build . -t app
+
+    - name: Run Robot Framework tests
       run: |
-        docker-compose -f docker-compose.yml up --build -d
+        docker run --name app app
+
+    # - name: List directory contents for debugging
+    #   run: ls -la txn
+
+    # - name: Set up Docker Compose
+    #   run: |
+    #     docker-compose -f docker-compose.yml up --build -d
     
-    - name: List Docker containers
-      run: docker ps
+    # - name: List Docker containers
+    #   run: docker ps
       
-    - name: Check txn container status
-      run: docker ps | grep txn_txn_1
+    # - name: Check txn container status
+    #   run: docker ps | grep txn_txn_1
     
-    - name: Logs txn
-      run: docker logs txn_txn_1
+    # - name: Logs txn
+    #   run: docker-compose logs txn_txn_1
       
     - name: Docker Compose logs
-      run: docker exec txn_txn_1 curl localhost:8080/api/transactions/status
+      run: docker exec app curl localhost:8084/api/transactions/status
 
-    - name: Run Tests
-      run: |
-        docker-compose run --rm tests
+    # - name: Run Tests
+    #   run: |
+    #     docker-compose run --rm tests
 
-    - name: Clean up
-      if: always()
-      run: |
-        docker-compose -f docker-compose.yml down
+    # - name: Clean up
+    #   if: always()
+    #   run: |
+    #     docker-compose -f docker-compose.yml down
