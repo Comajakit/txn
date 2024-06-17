@@ -36,10 +36,10 @@ jobs:
       run: docker ps
       
     - name: logs txn
-      run: docker logs txn_txn -f
+      run: docker logs txn -f
 
     - name: logs shop
-      run: docker logs txn_shop -f
+      run: docker logs shop -f
 
     - name: Wait for services to be ready
       run: |
