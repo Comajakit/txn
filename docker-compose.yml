@@ -35,31 +35,31 @@ services:
       db:
         condition: service_healthy
 
-  # shop:
-  #   build:
-  #     context: ./shop
-  #   ports:
-  #     - "8081:8082"
-  #   environment:
-  #     - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mysqldatabase
-  #     - SPRING_DATASOURCE_USERNAME=root
-  #     - SPRING_DATASOURCE_PASSWORD=P@ssw0rd
-  #     - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  shop:
+    build:
+      context: ./shop
+    ports:
+      - "8081:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mysqldatabase
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=P@ssw0rd
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
   #   healthcheck:
   #     test: ["CMD", "curl", "-f", "http://localhost:8082/health"]
   #     interval: 30s
   #     timeout: 10s
   #     retries: 3
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
+    depends_on:
+      db:
+        condition: service_healthy
 
   tests:
     build:
       context: ../txn
       dockerfile: Dockerfile.test
-    # depends_on:
-    #   - txn
-    #   - shop
+    depends_on:
+      - txn
+      - shop
 volumes:
   db_data:

@@ -16,11 +16,11 @@ jobs:
     - name: Checkout this repository
       uses: actions/checkout@v3
 
-    # - name: Checkout shop repository
-    #   uses: actions/checkout@v3
-    #   with:
-    #     repository: 'Comajakit/shop'
-    #     path: 'shop'
+    - name: Checkout shop repository
+      uses: actions/checkout@v3
+      with:
+        repository: 'Comajakit/shop'
+        path: 'shop'
 
     - name: List directory contents for debugging
       run: ls -la
@@ -60,11 +60,11 @@ jobs:
     - name: Docker Compose logs
       run: docker exec txn_txn_1 curl localhost:8084/api/transactions/status
 
-    # - name: Run Tests
-    #   run: |
-    #     docker-compose run --rm tests
+    - name: Run Tests
+      run: |
+        docker-compose run --rm tests
 
-    # - name: Clean up
-    #   if: always()
-    #   run: |
-    #     docker-compose -f docker-compose.yml down
+    - name: Clean up
+      if: always()
+      run: |
+        docker-compose -f docker-compose.yml down
