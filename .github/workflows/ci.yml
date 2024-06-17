@@ -25,17 +25,12 @@ jobs:
     - name: List directory contents for debugging
       run: ls -la
 
-
-
     # - name: List directory contents for debugging
     #   run: ls -la txn
 
     - name: Set up Docker Compose
       run: |
         docker-compose -f docker-compose.yml up --build -d
-    
-    # - name: Build Docker image for testing
-    #   run: docker build . -t app
 
     - name: List Docker containers
       run: docker ps
@@ -61,7 +56,6 @@ jobs:
     
     - name: List Docker containers
       run: docker ps
-
 
     - name: Docker Compose logs
       run: docker exec txn_txn_1 curl localhost:8084/api/transactions/status
