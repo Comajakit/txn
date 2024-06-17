@@ -2,8 +2,8 @@
 Library    RequestsLibrary
 
 *** Variables ***
-${TXN_BASE_URL}   http://txn:8080
-${SHOP_BASE_URL}  http://shop:8081
+${TXN_BASE_URL}   http://txn:8084
+${SHOP_BASE_URL}  http://shop:8082
 
 *** Test Cases ***
 Test GET request to txn service
